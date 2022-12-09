@@ -72,9 +72,9 @@ export default function FormLogin(){
     
     return(
 <Fragment>
-    <div className="col-4 offset-md-4">
+    <div className="col-4 offset-md-4" >
         <form>
-            <div className="input-group text-primary">
+            <div className="input-group text-primary" style={{width: '100%'}}>
                 <div className="form-floating mb-3">
                     <input type="email" className="form-control" 
                         placeholder="name@example.com" 
@@ -83,7 +83,7 @@ export default function FormLogin(){
                     <label htmlFor="floatingInput"><MdEmail /> Email address</label>
                 </div>
             </div>
-            <div className="form-floating mb-3 text-primary">
+            <div className="form-floating mb-3 text-primary "style={{width: '100%'}}>
                 <input type="password" 
                 className="form-control" 
                 placeholder="name@example.com" 
