@@ -9,7 +9,7 @@ import Spinner from "../Spinner";
 //Icons
 import {MdEmail} from 'react-icons/md';
 import{RiLockPasswordFill} from 'react-icons/ri' 
-import Auth from "../../context/Auth";
+// import Auth from "../../context/Auth";
 // import Token from "../../context/Token";
 
 
@@ -30,7 +30,7 @@ let ZeroState: Login ={
 
 
 export default function FormLogin(){
-    const {Authorized, setAuthorized}: any = useContext(Auth);
+    // const {Authorized, setAuthorized}: any = useContext(Auth);
     // const {Tokenn, setToken}:any = useContext(Token);
     const [formValues, setFormValues] = useState(ZeroState);
     const [Loading, setLoading] = useState(false);
@@ -54,7 +54,7 @@ export default function FormLogin(){
         try {
             let LoginResponse: AxiosResponse = await Axios.post("http://peopletest.leadsoft.inf.br/api/v1/Auth/LogIn", Access);
             if (LoginResponse.status = 200) {
-                setAuthorized(true);
+                // setAuthorized(true);
                 // setToken(LoginResponse.data.Authorization);
                 setLoading(false);
                 navigate("/home");

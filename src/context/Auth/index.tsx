@@ -1,16 +1,17 @@
-import React, { Children } from "react"
+import React, { useState } from "react"
 
 
-// const  Authl = React.createContext({});
+const  Authl = React.createContext({});
 
-// function Auth(props:{children:any}){
-//      const[Authorized, setAuthorized] = useState(false);
-//     return( <Auth.Provider value ={{Authorized, setAuthorized}}>
-//                 {Children}
+function Auth(props:{children:any}){
+     const[Authorized, setAuthorized] = useState(false);
 
-//                 <Authl.Provider>)
-// }
-// export default Auth;
+    return( 
+    <Authl.Provider value ={{Authorized, setAuthorized}}>
+            {props.children}
+    </Authl.Provider>)
+}
+export default Auth;
 
 
 
