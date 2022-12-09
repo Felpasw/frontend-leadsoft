@@ -1,6 +1,7 @@
-import { Fragment, useContext, useEffect } from "react"
+import { Fragment, useContext } from "react"
 import Auth from "../../context/Auth"
-
+import PeopleList from "../../Components/PeopleList";
+import NavbarHome from "../../Components/NavbarHome";
 
 
 
@@ -8,13 +9,13 @@ import Auth from "../../context/Auth"
 
 
 export default function HomePage(){
-    const{Auhorized}:any = useContext(Auth);
-    if(Auhorized){
+    const{Authorized}:any = useContext(Auth);
+    if(Authorized){
         return(
             <Fragment>
-                <h1 className="text-light">HomePage </h1>
-            </Fragment>)
-        
+                <NavbarHome/>
+                <PeopleList/>
+            </Fragment>)   
     }
     else{
         return( <h1 className="text-light"> Entrada não autorizada! </h1>)

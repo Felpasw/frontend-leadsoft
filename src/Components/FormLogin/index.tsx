@@ -2,7 +2,7 @@ import { Fragment, useContext, useState } from "react";
 import{useNavigate} from 'react-router-dom'; 
 
 
-import { AxiosInstance } from "../../Config/Axios";
+import { Axios} from "../../Config/Axios";
 import {AxiosResponse} from 'axios';
 import Spinner from "../Spinner";
 import {toast} from 'react-toastify';
@@ -34,7 +34,7 @@ export default function FormLogin(){
     const [formValues, setFormValues] = useState(ZeroState);
     const [Loading, setLoading] = useState(false);
     const navigate = useNavigate();
-    const {setAuthorized}: any= useContext(Auth);
+    const {setAuthorized}:any = useContext(Auth);
 
 //---------------------
     const handleChange = (e: { target: { name: string; value: string; }; }): void =>{
@@ -53,10 +53,10 @@ export default function FormLogin(){
         }
         
         try {
-            let LoginResponse: AxiosResponse = await AxiosInstance.post( "api/v1/Auth/LogIn", Access);
+            let LoginResponse: AxiosResponse = await Axios.post("api/v1/Auth/LogIn", Access);
             if (LoginResponse.status = 200) {
                 sessionStorage.setItem("Authorization", LoginResponse.data.Authorization);
-                setAuthorized(true)
+                setAuthorized(true);
                 setLoading(false);
                 navigate("/home");
                                 

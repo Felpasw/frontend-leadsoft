@@ -2,14 +2,14 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import URL from "../../URL";
 
-export const AxiosInstance = axios.create({
+export const Axios = axios.create({
   baseURL: `${URL.baseURL}`,
   headers: {
     "Content-Type": "application/json-patch+json",
   },
 });
 
-AxiosInstance.interceptors.request.use((request) => {
+Axios.interceptors.request.use((request) => {
   request.headers = {
     ...request.headers,
     Authorization: sessionStorage.getItem("Authorization") || "",
@@ -17,7 +17,7 @@ AxiosInstance.interceptors.request.use((request) => {
   return request;
 });
 
-AxiosInstance.interceptors.response.use(
+Axios.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response.status === 401) {
