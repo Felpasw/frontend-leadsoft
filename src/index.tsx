@@ -5,8 +5,7 @@ import { Route, Routes, BrowserRouter } from 'react-router-dom';
 import LoginPage from "./Pages/LoginPage" 
 import UsersPage from './Pages/UsersPage';
 import HomePage from './Pages/HomePage';
-import Auth from './context/Auth';
-
+import App from './App';
 
 
  
@@ -15,15 +14,7 @@ import Auth from './context/Auth';
     document.getElementById('root') as HTMLElement
   );
 root.render(
-    <React.StrictMode>
-      <BrowserRouter>
-         < Auth  children={<Routes>
-            <Route path="/" element={<LoginPage />} />
-            <Route path="/users" element={<UsersPage />} />
-            <Route path="/home" element={<HomePage />} />
-         </Routes>}/>
-      </BrowserRouter>
-     </React.StrictMode>
+    <App/>
 );
 
 

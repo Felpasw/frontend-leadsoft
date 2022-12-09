@@ -1,12 +1,24 @@
 import { Fragment, useContext, useEffect } from "react"
-import Authl from "../../context/Auth"
+import Auth from "../../context/Auth"
+
+
+
+
+
 
 
 export default function HomePage(){
-    return(
-        <Fragment>
-            <h1 className="text-light">HomePage </h1>
-        </Fragment>)
+    const{Auhorized}:any = useContext(Auth);
+    if(Auhorized){
+        return(
+            <Fragment>
+                <h1 className="text-light">HomePage </h1>
+            </Fragment>)
+        
+    }
+    else{
+        return( <h1 className="text-light"> Entrada não autorizada! </h1>)
+    }
     
     
    

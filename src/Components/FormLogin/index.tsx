@@ -1,16 +1,17 @@
 import { Fragment, useContext, useState } from "react";
 import{useNavigate} from 'react-router-dom'; 
 
-import Button from '../Button';
-import Axios from 'axios'
+
+import { AxiosInstance } from "../../Config/Axios";
 import {AxiosResponse} from 'axios';
 import Spinner from "../Spinner";
+import {toast} from 'react-toastify';
 
 //Icons
 import {MdEmail} from 'react-icons/md';
 import{RiLockPasswordFill} from 'react-icons/ri' 
-// import Auth from "../../context/Auth";
-// import Token from "../../context/Token";
+import Auth from "../../context/Auth";
+
 
 
 
@@ -30,11 +31,11 @@ let ZeroState: Login ={
 
 
 export default function FormLogin(){
-    // const {Authorized, setAuthorized}: any = useContext(Auth);
-    // const {Tokenn, setToken}:any = useContext(Token);
     const [formValues, setFormValues] = useState(ZeroState);
     const [Loading, setLoading] = useState(false);
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    const {setAuthorized}: any= useContext(Auth);
+
 //---------------------
     const handleChange = (e: { target: { name: string; value: string; }; }): void =>{
         let name  = e.target.name;
@@ -52,24 +53,25 @@ export default function FormLogin(){
         }
         
         try {
-            let LoginResponse: AxiosResponse = await Axios.post("http://peopletest.leadsoft.inf.br/api/v1/Auth/LogIn", Access);
+            let LoginResponse: AxiosResponse = await AxiosInstance.post( "api/v1/Auth/LogIn", Access);
             if (LoginResponse.status = 200) {
-                // setAuthorized(true);
-                // setToken(LoginResponse.data.Authorization);
+                sessionStorage.setItem("Authorization", LoginResponse.data.Authorization);
+                setAuthorized(true)
                 setLoading(false);
                 navigate("/home");
                                 
             }
         } catch (error) {
             console.log(error);
-            alert("Usuário ou senha inválidos!");
+            alert("Usuário ou senha inválidos!")
+            //toast.error("Usuário ou senha inválidos!");
             setLoading(false);
         }
        
     }
 
 
-    
+//------------------- 
     return(
 <Fragment>
     <div className="col-4 offset-md-4" >
