@@ -1,4 +1,6 @@
+import { AxiosResponse } from "axios";
 import { Fragment, useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom";
 import {Axios} from '../../Config/Axios'
 import Button from "../Button";
 
@@ -17,22 +19,25 @@ interface PeopleType{
 
 export default function PeopleList(){
     const[People, setPeople] = useState([] as PeopleType[]);
-
+    const navigate = useNavigate();
    const getItems = async ()  => {
     
     await Axios.get('/api/v1/People').then((response: { data: React.SetStateAction<PeopleType[]>; }) => setPeople(response.data));
     
   }
 
-  useEffect(() =>{
-    getItems();
-    console.log(People);
-  })
+    useEffect(() =>{
+        getItems();
+      
+     })
 
-// const removePeople(){
-
-// }
-
+    const removePeople = async (id: string) =>{
+        const DeleteResponse: AxiosResponse = await Axios.delete(`api/v1/People/${id}`)
+        if(DeleteResponse.status = 200){
+            alert("Data succesfully deleted!")
+        }
+        
+    }
 
 
     return(
@@ -49,8 +54,8 @@ export default function PeopleList(){
                         <p className="card-text">Age Of Birth: {element.DateOfBirth}</p>
                         <p className="card-text">Weight: {element.Weigth}</p>
                         <p className="card-text">Height: {element.Height}</p>
-                            <Button message="Edit"/>   
-                            <Button message="Remove"/>  
+                           <button type="button" className="btn btn-outline-primary"  onClick={() => navigate(`/edit/${element.Id}`)}>Edit</button>  
+                           <button type="button" className="btn btn-outline-primary"  onClick={() => removePeople(element.Id)}>Remove</button>
                         </div>
                     </div>
                 </div>

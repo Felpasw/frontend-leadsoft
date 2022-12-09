@@ -6,7 +6,7 @@ import { Route, Routes, BrowserRouter } from 'react-router-dom';
 import LoginPage from "../Pages/LoginPage" 
 import HomePage from '../Pages/HomePage';
 import Auth from '../context/Auth';
-import EditOtAddPage from '../Pages/EditOtAddPage';
+import EditOrAddPage from '../Pages/EditOrAddPage';
 
 
 
@@ -20,8 +20,8 @@ export default function App(){
                 <Auth.Provider value ={{Authorized, setAuthorized}}>
                     <Routes>
                         <Route path="/" element={<LoginPage />} />
-                        <Route path="/newPeople" element={<EditOtAddPage/>} />
-                        <Route path= "/edit/:id" element= {<EditOtAddPage/>}/>
+                        <Route path="/new" element={<EditOrAddPage/>} />
+                        <Route path= "/edit/:id" element= {<EditOrAddPage/>}/>
                         <Route path="/home" element={<HomePage />} />
                     </Routes>
                 </Auth.Provider>
