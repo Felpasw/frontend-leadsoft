@@ -5,13 +5,15 @@ import { ImCancelCircle } from "react-icons/im";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
-
+//Types
 import PeopleType from "../../@types/People";
-
+//
 import { Axios } from "../../Config/Axios";
 
-
+//icons
 import Spinner from "../Spinner";
+import{TbSend} from "react-icons/tb"
+
 
 const ZeroState: PeopleType = {
         Name: "",
@@ -98,7 +100,7 @@ export default function FormEditOrAdd(props:{id:string}){
     
     return(
 <Fragment>  
-        <button onClick={() => navigate("/home")} type="button" className="btn btn-outline-primary" >  <ImCancelCircle/> <Spinner loading={loading} /></button> 
+        
         <div className="text-center">
             <img src={require("../../@img/logoBranco.png")} style={{width:300, margin: 30}}/>
         </div>
@@ -145,8 +147,9 @@ export default function FormEditOrAdd(props:{id:string}){
                 value={formValues.Height}/>
                 <label htmlFor="floatingInput"> Height </label>
             </div>
-            <div className="col-8 offset-md-5">
-                <button onClick={handleSubmit} type="button" className="btn btn-outline-primary" > Send <Spinner loading={loading} /></button>    
+            <div className="col-8 offset-md-4">
+                <button onClick={handleSubmit} type="button" className="btn btn-outline-primary"  style={{margin: 3}}> <TbSend/> Send <Spinner loading={loading} /></button>    
+                <button onClick={() => navigate("/home")} type="button" className="btn btn-outline-primary" > <ImCancelCircle/> Cancel </button> 
             </div>
         </form> 
     </div>
