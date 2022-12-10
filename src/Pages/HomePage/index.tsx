@@ -2,6 +2,8 @@ import { Fragment, useContext } from "react"
 import Auth from "../../context/Auth"
 import PeopleList from "../../Components/PeopleList";
 import NavbarHome from "../../Components/NavbarHome";
+import Footer from "../../Components/Footer";
+import ErrorPage from "../ErrorPage"
 
 
 
@@ -15,10 +17,11 @@ export default function HomePage(){
             <Fragment>
                 <NavbarHome/>
                 <PeopleList/>
+                <Footer/>
             </Fragment>)   
     }
     else{
-        return( <h1 className="text-light"> Entrada não autorizada! </h1>)
+        return(<ErrorPage/>)
     }
     
     

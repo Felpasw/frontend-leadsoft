@@ -23,7 +23,7 @@ Axios.interceptors.response.use(
     if (error.response.status === 401) {
       alert("Erro de requisição. Nova autenticação necessária");
     //   toast.error("Erro de requisição. Nova autenticação necessária.");
-      window.location.href = "/login";
+      window.location.href = "/";
     }
     return Promise.reject(error);
   }

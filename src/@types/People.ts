@@ -4,5 +4,5 @@ export default interface PeopleType{
     Surname: string,
     DateOfBirth: string,
     Weigth: number,
-    Height: number
+    Heigth: number
 }

@@ -1,9 +1,11 @@
 import { AxiosError, AxiosResponse } from "axios";
+import { stringify } from "querystring";
 import { Fragment, useEffect, useState } from "react";
 import { ImCancelCircle } from "react-icons/im";
 import { useNavigate } from "react-router-dom";
 import PeopleType from "../../@types/People";
 import { Axios } from "../../Config/Axios";
+import Footer from "../Footer";
 import NavbarHome from "../NavbarHome";
 import Spinner from "../Spinner";
 
@@ -13,7 +15,7 @@ const ZeroState: PeopleType = {
         Surname: "",
         DateOfBirth: "",
         Weigth: 0,
-        Height: 0
+        Heigth: 0
 } 
 
 export default function FormEditOrAdd(props:{id?:string}){
@@ -27,8 +29,8 @@ export default function FormEditOrAdd(props:{id?:string}){
             Name: formValues.Name,
             Surname: formValues.Surname,
             DateOfBirth: formValues.DateOfBirth,
-            Weight: formValues.Weigth,
-            Height: formValues.Height
+            Weight: Number(formValues.Weigth),
+            Height: Number(formValues.Heigth)
         }
         isLoading(true);
         try {
@@ -51,8 +53,12 @@ export default function FormEditOrAdd(props:{id?:string}){
                     return PostResponse.data
                 }
             }
-        } catch (error) {
-            alert("Failed to send the form!\n" + error);
+        } catch (error:any) {
+            console.log(error)
+            alert("Failed to send the form!\n" + error.response.data.title + "\n");
+            error.response.data.errors.array.forEach((element: any) => {
+                alert(element)
+            });
             isLoading(false);
         }
         
@@ -85,6 +91,7 @@ export default function FormEditOrAdd(props:{id?:string}){
         let name  = e.target.name;
         let  value = e.target.value;
         setFormValues({...formValues, [name]: value});
+        console.log(name, value)
       }
     //-------------
     
@@ -92,6 +99,9 @@ export default function FormEditOrAdd(props:{id?:string}){
 <Fragment>
         <NavbarHome/>
         <button onClick={() => navigate("/home")} type="button" className="btn btn-outline-primary" >  <ImCancelCircle/> <Spinner loading={loading} /></button> 
+        <div className="text-center">
+            <img src={require("../../@img/logoBranco.png")} style={{width:300, margin: 30}}/>
+        </div>
         <div className="col-4 offset-md-4" >
         <form>
             <div className="input-group text-primary" style={{width: '100%'}}>
@@ -122,8 +132,9 @@ export default function FormEditOrAdd(props:{id?:string}){
                 <input type="text" 
                 className="form-control" 
                 onChange={handleChange}
-                name = "Weight" value={formValues.Weigth}/>
-                <label htmlFor="floatingInput"> Weight</label>
+                name = "Weigth" 
+                value={formValues.Weigth}/>
+                <label htmlFor="floatingInput"> Weight </label>
             </div>
             
             <div className="form-floating mb-3 text-primary "style={{width: '100%'}}>
@@ -131,14 +142,15 @@ export default function FormEditOrAdd(props:{id?:string}){
                 className="form-control" 
                 onChange={handleChange}
                 name = "Height" 
-                value={formValues.Height}/>
-                <label htmlFor="floatingInput" > Height </label>
+                value={formValues.Heigth}/>
+                <label htmlFor="floatingInput"> Height </label>
             </div>
             <div className="col-8 offset-md-5">
                 <button onClick={handleSubmit} type="button" className="btn btn-outline-primary" > Send <Spinner loading={loading} /></button>    
             </div>
         </form>
     </div>
+    <Footer/>
 </Fragment>
     )
 }
