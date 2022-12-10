@@ -59,9 +59,9 @@ export default function PeopleList(){
                             <div className="card-body">
                                 <h5 className="card-title"><IoMdContact/> {element.Name} </h5>
                                 <h6 className="card-subtitle mb-2 text-muted">{element.Surname}</h6>
-                                <p className="card-text"><MdDateRange/> Date Of Birth:{element.DateOfBirth}</p>
-                                <p className="card-text"><FaWeightHanging/> Weight: {element.Weigth}KG</p>
+                                <p className="card-text"><FaWeightHanging/> Weight: {element.Weigth}kg</p>
                                 <p className="card-text"><GiBodyHeight/> Height: {element.Height}m</p>
+                                <p className="card-text">IMC: {element.Weigth / (element.Height*element.Height)} kg/m²</p>
                                 <button type="button" className="btn btn-outline-primary"  onClick={() => navigate(`/edit/${element.Id}`)}>Edit</button>  
                                 <button type="button" className="btn btn-outline-primary"  onClick={() => removePeople(element.Id)}>Remove</button>
                         </div>
