@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 
 //Types
 import PeopleType from "../../@types/People";
-//
+//Axios
 import { Axios } from "../../Config/Axios";
 
 //icons
@@ -31,42 +31,44 @@ export default function FormEditOrAdd(props:{id:string}){
    
 
     const handleSubmit =  async () =>  {
-        const People: PeopleType= {
-            Name: formValues.Name,
-            Surname: formValues.Surname,
-            DateOfBirth: formValues.DateOfBirth,
-            Weigth: Number(formValues.Weigth),
-            Height: Number(formValues.Height)
-        }
-        isLoading(true);
-        try {
-            if(props.id !=="c"){
-                const PutResponse: AxiosResponse =  await Axios.put(`/api/v1/People/${props.id}`, People);
-                    if(PutResponse.status = 200){
-                        toast.success("Data succesfully edited!");
-                        isLoading(false);
-                    } 
-            }   
-            else{
-                const PostResponse: AxiosResponse = await Axios.post("/api/v1/People", People)
-                isLoading(false);
-                if (PostResponse.status = 200){
-                    toast.success("Data succesfully sendded!")
+       if (formValues.Name && formValues.DateOfBirth && formValues.Height && formValues.Surname && formValues.Weigth){   
+            const People: PeopleType= {
+	                Name: formValues.Name,
+	                Surname: formValues.Surname,
+	                DateOfBirth: formValues.DateOfBirth,
+	                Weigth: Number(formValues.Weigth),
+	                Height: Number(formValues.Height)
+	            }
+	            isLoading(true);
+                if(People.Weigth  == 0 || People.Height == 0){
+                    toast.error("weigth or height musbe greater than 0!")
+                    isLoading(false)
                 }
-                
-            }
-        } catch (error:any) {
-            console.log(error)
-            alert("Failed to send the form!\n" + error.response.data.title + "\n");
-            error.response.data.errors.array.forEach((element: any) => {
-                alert(element)
-            });
-            isLoading(false);
+                else{
+                    if(props.id !=="c"){
+	                    const PutResponse: AxiosResponse =  await Axios.put(`/api/v1/People/${props.id}`, People);
+	                        if(PutResponse.status = 200){
+	                            toast.success("Data succesfully edited!");
+	                            isLoading(false);
+	                        } 
+	                }   
+	                else{
+	                    const PostResponse: AxiosResponse = await Axios.post("/api/v1/People", People)
+	                    isLoading(false);
+	                    if (PostResponse.status = 200){
+	                        toast.success("Data succesfully sendded!")
+	                    }
+	                
+	                
+                    }
+                }
+	               
         }
-        
-         
+        else{
+            toast.error("Please fulfill all the form fields!")
+        }
            
-        }
+}
        
     
 
@@ -131,7 +133,7 @@ export default function FormEditOrAdd(props:{id:string}){
                 <label htmlFor="floatingInput"> Date of Birth</label>
             </div>
             <div className="form-floating mb-3 text-primary "style={{width: '100%'}}>
-                <input type="text" 
+                <input type="number" 
                 className="form-control" 
                 onChange={handleChange}
                 name = "Weigth" 
@@ -140,7 +142,7 @@ export default function FormEditOrAdd(props:{id:string}){
             </div>
             
             <div className="form-floating mb-3 text-primary "style={{width: '100%'}}>
-                <input type="text" 
+                <input type="number" 
                 className="form-control" 
                 onChange={handleChange}
                 name = "Height" 

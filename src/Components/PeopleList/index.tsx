@@ -56,9 +56,9 @@ export default function PeopleList(){
         { 
             People.map( (element:PeopleType) =>
            
-                <div className="col-3">
+                <div className="col-3 d-flex p-2">
                         <div className="card text-primary" style={{width: "18rem", margin: 10}}  >
-                            <div className="card-body">
+                            <div className="card-body float-none">
                                 <h5 className="card-title"><IoMdContact/> {element.Name} </h5>
                                 <h6 className="card-subtitle mb-2 text-muted">{element.Surname}</h6>
                                 <p className="card-text"><FaWeightHanging/> Weight: {element.Weigth}kg</p>

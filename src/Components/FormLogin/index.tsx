@@ -4,11 +4,14 @@ import{useNavigate} from 'react-router-dom';
 
 import { Axios} from "../../Config/Axios";
 import {AxiosResponse} from 'axios';
-import Spinner from "../Spinner";
-import {toast, ToastContainer} from 'react-toastify';
+
+//Toast
+import {toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+
 //Icons
 import {MdEmail} from 'react-icons/md';
+import Spinner from "../Spinner";
 import{RiLockPasswordFill} from 'react-icons/ri' 
 import Auth from "../../context/Auth";
 import Login from "../../@types/Login";
@@ -56,7 +59,6 @@ export default function FormLogin(){
                 setAuthorized(true);
                 setLoading(false);
                 navigate("/home");
-                toast.success("Login success!");
                                 
             }
         } catch (error) {
@@ -92,7 +94,7 @@ export default function FormLogin(){
                 <label htmlFor="floatingInput"><RiLockPasswordFill /> Password</label>
             </div>
             <div className="col-8 offset-md-5">
-                <button onClick={handleSubmit} type="button" className="btn btn-outline-primary" >Enter <Spinner loading={Loading} /></button>  
+                <button onClick={handleSubmit} type="button" className="btn btn-outline-primary" data-testid="EnterButton" >Enter <Spinner loading={Loading} /></button>  
             </div>
         </form>
     </div>
