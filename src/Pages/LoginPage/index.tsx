@@ -1,4 +1,5 @@
 import { Fragment } from "react"
+import { ToastContainer } from "react-toastify"
 
 import Footer from "../../Components/Footer"
 import FormLogin from "../../Components/FormLogin"
@@ -16,5 +17,6 @@ export default function LoginPage(){
     </div>
     <FormLogin/>
     <Footer/>  
+    <ToastContainer/>
 </Fragment>
 )}

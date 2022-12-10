@@ -5,20 +5,17 @@ import{useNavigate} from 'react-router-dom';
 import { Axios} from "../../Config/Axios";
 import {AxiosResponse} from 'axios';
 import Spinner from "../Spinner";
-import {toast} from 'react-toastify';
-
+import {toast, ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 //Icons
 import {MdEmail} from 'react-icons/md';
 import{RiLockPasswordFill} from 'react-icons/ri' 
 import Auth from "../../context/Auth";
+import Login from "../../@types/Login";
 
 
 
 
-interface Login{
-    username: string,
-    password: string
-}
 
 
 let ZeroState: Login ={
@@ -59,11 +56,12 @@ export default function FormLogin(){
                 setAuthorized(true);
                 setLoading(false);
                 navigate("/home");
+                toast.success("Login success!");
                                 
             }
         } catch (error) {
             console.log(error);
-            alert("Usuário ou senha inválidos!")
+            toast.error("Incorrect user or password!")
             //toast.error("Usuário ou senha inválidos!");
             setLoading(false);
         }
@@ -73,7 +71,7 @@ export default function FormLogin(){
 
 //------------------- 
     return(
-<Fragment>
+<Fragment> 
     <div className="col-4 offset-md-4" >
         <form>
             <div className="input-group text-primary" style={{width: '100%'}}>
@@ -94,7 +92,7 @@ export default function FormLogin(){
                 <label htmlFor="floatingInput"><RiLockPasswordFill /> Password</label>
             </div>
             <div className="col-8 offset-md-5">
-                <button onClick={handleSubmit} type="button" className="btn btn-outline-primary" >Enter <Spinner loading={Loading} /></button>    
+                <button onClick={handleSubmit} type="button" className="btn btn-outline-primary" >Enter <Spinner loading={Loading} /></button>  
             </div>
         </form>
     </div>

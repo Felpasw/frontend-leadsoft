@@ -1,57 +1,57 @@
-import { AxiosError, AxiosResponse } from "axios";
-import { stringify } from "querystring";
+import {  AxiosResponse } from "axios";
+
 import { Fragment, useEffect, useState } from "react";
 import { ImCancelCircle } from "react-icons/im";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+
+
 import PeopleType from "../../@types/People";
+
 import { Axios } from "../../Config/Axios";
-import Footer from "../Footer";
-import NavbarHome from "../NavbarHome";
+
+
 import Spinner from "../Spinner";
 
 const ZeroState: PeopleType = {
-        Id: "",
         Name: "",
         Surname: "",
         DateOfBirth: "",
         Weigth: 0,
-        Heigth: 0
+        Height: 0
 } 
 
-export default function FormEditOrAdd(props:{id?:string}){
+export default function FormEditOrAdd(props:{id:string}){
     const [formValues, setFormValues] = useState( ZeroState as PeopleType)
-    const [loading, isLoading] = useState(false)
-    const navigate = useNavigate()
+    const [loading, isLoading] = useState(false);
+    const navigate = useNavigate();
+
    
 
     const handleSubmit =  async () =>  {
-        const People = {
+        const People: PeopleType= {
             Name: formValues.Name,
             Surname: formValues.Surname,
             DateOfBirth: formValues.DateOfBirth,
-            Weight: Number(formValues.Weigth),
-            Height: Number(formValues.Heigth)
+            Weigth: Number(formValues.Weigth),
+            Height: Number(formValues.Height)
         }
         isLoading(true);
         try {
-            if(props.id){
+            if(props.id !=="c"){
                 const PutResponse: AxiosResponse =  await Axios.put(`/api/v1/People/${props.id}`, People);
                     if(PutResponse.status = 200){
-                        alert("Data succesfully edited!");
+                        toast.success("Data succesfully edited!");
                         isLoading(false);
-                    } else{
-                        return PutResponse.data
-                    }
-            }
+                    } 
+            }   
             else{
                 const PostResponse: AxiosResponse = await Axios.post("/api/v1/People", People)
                 isLoading(false);
                 if (PostResponse.status = 200){
-                    alert("Data succesfully sended!")
+                    toast.success("Data succesfully sendded!")
                 }
-                else{
-                    return PostResponse.data
-                }
+                
             }
         } catch (error:any) {
             console.log(error)
@@ -72,6 +72,7 @@ export default function FormEditOrAdd(props:{id?:string}){
     //-------------
     const getItem = async (id:string) =>{
          const getResponse = await Axios.get(`/api/v1/People/${id}`)
+         console.log(getResponse)
          return getResponse
         
     }
@@ -79,9 +80,9 @@ export default function FormEditOrAdd(props:{id?:string}){
 
 
     useEffect(() => { 
-        
         if(props.id){
             getItem(props.id).then((res: AxiosResponse) => setFormValues(res.data))
+            
           }
     }, [])
    
@@ -96,8 +97,7 @@ export default function FormEditOrAdd(props:{id?:string}){
     //-------------
     
     return(
-<Fragment>
-        <NavbarHome/>
+<Fragment>  
         <button onClick={() => navigate("/home")} type="button" className="btn btn-outline-primary" >  <ImCancelCircle/> <Spinner loading={loading} /></button> 
         <div className="text-center">
             <img src={require("../../@img/logoBranco.png")} style={{width:300, margin: 30}}/>
@@ -134,7 +134,7 @@ export default function FormEditOrAdd(props:{id?:string}){
                 onChange={handleChange}
                 name = "Weigth" 
                 value={formValues.Weigth}/>
-                <label htmlFor="floatingInput"> Weight </label>
+                <label htmlFor="floatingInput"> Weigth </label>
             </div>
             
             <div className="form-floating mb-3 text-primary "style={{width: '100%'}}>
@@ -142,15 +142,14 @@ export default function FormEditOrAdd(props:{id?:string}){
                 className="form-control" 
                 onChange={handleChange}
                 name = "Height" 
-                value={formValues.Heigth}/>
+                value={formValues.Height}/>
                 <label htmlFor="floatingInput"> Height </label>
             </div>
             <div className="col-8 offset-md-5">
                 <button onClick={handleSubmit} type="button" className="btn btn-outline-primary" > Send <Spinner loading={loading} /></button>    
             </div>
-        </form>
+        </form> 
     </div>
-    <Footer/>
 </Fragment>
     )
 }

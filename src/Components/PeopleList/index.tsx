@@ -2,7 +2,13 @@ import { AxiosResponse } from "axios";
 import { Fragment, useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom";
 import {Axios} from '../../Config/Axios'
-import Button from "../Button";
+
+//icons
+import {IoMdContact} from 'react-icons/io'
+import { MdDateRange } from "react-icons/md";
+import { FaWeightHanging } from "react-icons/fa";
+import {GiBodyHeight} from 'react-icons/gi'
+import { toast } from "react-toastify";
 
 
 interface PeopleType{
@@ -20,25 +26,27 @@ interface PeopleType{
 export default function PeopleList(){
     const[People, setPeople] = useState([] as PeopleType[]);
     const navigate = useNavigate();
-   const getItems = async ()  => {
+   
     
-    await Axios.get('/api/v1/People').then((response: { data: React.SetStateAction<PeopleType[]>; }) => setPeople(response.data));
-    
-  }
-
+    //--------------
+    const getItems = async ()  => {
+        await Axios.get('/api/v1/People').then((response: { data: React.SetStateAction<PeopleType[]>; }) => setPeople(response.data))
+    }
+    //-------------
     useEffect(() =>{
         getItems();
       
      })
-
+    //-------------
     const removePeople = async (id: string) =>{
         const DeleteResponse: AxiosResponse = await Axios.delete(`api/v1/People/${id}`)
         if(DeleteResponse.status = 200){
-            alert("Data succesfully deleted!")
+            toast.success("Data succesfully deleted!")
         }
         
     }
 
+    //-------------
 
     return(
         <Fragment>
@@ -48,14 +56,14 @@ export default function PeopleList(){
            
                 <div className="col-3">
                         <div className="card text-primary" style={{width: "18rem", margin: 10}}  >
-                        <div className="card-body">
-                        <h5 className="card-title">{element.Name}</h5>
-                        <h6 className="card-subtitle mb-2 text-muted">{element.Surname}</h6>
-                        <p className="card-text">Age Of Birth: {element.DateOfBirth}</p>
-                        <p className="card-text">Weight: {element.Weigth}</p>
-                        <p className="card-text">Height: {element.Height}</p>
-                           <button type="button" className="btn btn-outline-primary"  onClick={() => navigate(`/edit/${element.Id}`)}>Edit</button>  
-                           <button type="button" className="btn btn-outline-primary"  onClick={() => removePeople(element.Id)}>Remove</button>
+                            <div className="card-body">
+                                <h5 className="card-title"><IoMdContact/> {element.Name} </h5>
+                                <h6 className="card-subtitle mb-2 text-muted">{element.Surname}</h6>
+                                <p className="card-text"><MdDateRange/> Date Of Birth:{element.DateOfBirth}</p>
+                                <p className="card-text"><FaWeightHanging/> Weight: {element.Weigth}KG</p>
+                                <p className="card-text"><GiBodyHeight/> Height: {element.Height}m</p>
+                                <button type="button" className="btn btn-outline-primary"  onClick={() => navigate(`/edit/${element.Id}`)}>Edit</button>  
+                                <button type="button" className="btn btn-outline-primary"  onClick={() => removePeople(element.Id)}>Remove</button>
                         </div>
                     </div>
                 </div>

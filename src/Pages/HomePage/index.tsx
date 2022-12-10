@@ -4,6 +4,7 @@ import PeopleList from "../../Components/PeopleList";
 import NavbarHome from "../../Components/NavbarHome";
 import Footer from "../../Components/Footer";
 import ErrorPage from "../ErrorPage"
+import { ToastContainer } from "react-toastify";
 
 
 
@@ -18,6 +19,7 @@ export default function HomePage(){
                 <NavbarHome/>
                 <PeopleList/>
                 <Footer/>
+                <ToastContainer/>
             </Fragment>)   
     }
     else{
