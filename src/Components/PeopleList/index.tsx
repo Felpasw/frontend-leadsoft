@@ -5,9 +5,11 @@ import {Axios} from '../../Config/Axios'
 
 //icons
 import {IoMdContact} from 'react-icons/io'
-import { MdDateRange } from "react-icons/md";
+import {GiWeightLiftingUp, GiBodyHeight} from "react-icons/gi"
 import { FaWeightHanging } from "react-icons/fa";
-import {GiBodyHeight} from 'react-icons/gi'
+import {AiFillEdit} from "react-icons/ai";
+import {HiUserRemove} from "react-icons/hi";
+//Toast
 import { toast } from "react-toastify";
 
 
@@ -61,9 +63,18 @@ export default function PeopleList(){
                                 <h6 className="card-subtitle mb-2 text-muted">{element.Surname}</h6>
                                 <p className="card-text"><FaWeightHanging/> Weight: {element.Weigth}kg</p>
                                 <p className="card-text"><GiBodyHeight/> Height: {element.Height}m</p>
-                                <p className="card-text">IMC: {element.Weigth / (element.Height*element.Height)} kg/m²</p>
-                                <button type="button" className="btn btn-outline-primary"  onClick={() => navigate(`/edit/${element.Id}`)}>Edit</button>  
-                                <button type="button" className="btn btn-outline-primary"  onClick={() => removePeople(element.Id)}>Remove</button>
+                                <p className="card-text"><GiWeightLiftingUp/> IMC: {element.Weigth / (element.Height*element.Height)} kg/m²</p>
+                                    <div className="text-center">
+                                        <button 
+                                        type="button" 
+                                        className="btn btn-outline-primary"  
+                                        onClick={() => navigate(`/edit/${element.Id}`)}> <AiFillEdit/> Edit</button>  
+                                        <button 
+                                        type="button" 
+                                        className="btn btn-outline-primary"  
+                                        onClick={() => removePeople(element.Id)}><HiUserRemove/>Remove</button>
+                                    </div>
+                              
                         </div>
                     </div>
                 </div>
