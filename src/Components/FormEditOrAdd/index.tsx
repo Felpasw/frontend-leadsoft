@@ -41,14 +41,14 @@ export default function FormEditOrAdd(props:{id:string}){
 	            }
 	            isLoading(true);
                 if(People.Weigth  == 0 || People.Height == 0){
-                    toast.error("weigth or height musbe greater than 0!")
+                    toast.error("Peso e altura devem ser maiores que 0!")
                     isLoading(false)
                 }
                 else{
                     if(props.id !=="c"){
 	                    const PutResponse: AxiosResponse =  await Axios.put(`/api/v1/People/${props.id}`, People);
 	                        if(PutResponse.status = 200){
-	                            toast.success("Data succesfully edited!");
+	                            toast.success("Pessoa editada com sucesso!");
 	                            isLoading(false);
 	                        } 
 	                }   
@@ -56,7 +56,7 @@ export default function FormEditOrAdd(props:{id:string}){
 	                    const PostResponse: AxiosResponse = await Axios.post("/api/v1/People", People)
 	                    isLoading(false);
 	                    if (PostResponse.status = 200){
-	                        toast.success("Data succesfully sendded!")
+	                        toast.success("Pessoa enviada com sucesso!")
 	                    }
 	                
 	                
@@ -65,7 +65,7 @@ export default function FormEditOrAdd(props:{id:string}){
 	               
         }
         else{
-            toast.error("Please fulfill all the form fields!")
+            toast.error("Por favor, preencha todos os campos!")
         }
            
 }
@@ -113,7 +113,7 @@ export default function FormEditOrAdd(props:{id:string}){
                     <input type="text" className="form-control"  
                         onChange={handleChange} 
                         name = "Name" value={formValues.Name}/>
-                    <label htmlFor="floatingInput"> Name</label>
+                    <label htmlFor="floatingInput"> Nome</label>
                 </div>
             </div>
 
@@ -122,7 +122,7 @@ export default function FormEditOrAdd(props:{id:string}){
                 className="form-control" 
                 onChange={handleChange}
                 name = "Surname" value={formValues.Surname}/>
-                <label htmlFor="floatingInput"> Surname</label>
+                <label htmlFor="floatingInput"> Sobrenome</label>
             </div>
 
             <div className="form-floating mb-3 text-primary "style={{width: '100%'}}>
@@ -130,7 +130,7 @@ export default function FormEditOrAdd(props:{id:string}){
                 className="form-control"  
                 onChange={handleChange}
                 name = "DateOfBirth" value={formValues.DateOfBirth}/>
-                <label htmlFor="floatingInput"> Date of Birth</label>
+                <label htmlFor="floatingInput"> Data de nascimento</label>
             </div>
             <div className="form-floating mb-3 text-primary "style={{width: '100%'}}>
                 <input type="number" 
@@ -138,7 +138,7 @@ export default function FormEditOrAdd(props:{id:string}){
                 onChange={handleChange}
                 name = "Weigth" 
                 value={formValues.Weigth}/>
-                <label htmlFor="floatingInput"> Weigth </label>
+                <label htmlFor="floatingInput"> Peso </label>
             </div>
             
             <div className="form-floating mb-3 text-primary "style={{width: '100%'}}>
@@ -147,11 +147,11 @@ export default function FormEditOrAdd(props:{id:string}){
                 onChange={handleChange}
                 name = "Height" 
                 value={formValues.Height}/>
-                <label htmlFor="floatingInput"> Height </label>
+                <label htmlFor="floatingInput"> Altura </label>
             </div>
             <div className="col-8 offset-md-4">
-                <button onClick={handleSubmit} type="button" className="btn btn-outline-primary"  style={{margin: 3}}> <TbSend/> Send <Spinner loading={loading} /></button>    
-                <button onClick={() => navigate("/home")} type="button" className="btn btn-outline-primary" > <ImCancelCircle/> Cancel </button> 
+                <button onClick={handleSubmit} type="button" className="btn btn-outline-primary"  style={{margin: 3}}> <TbSend/> Enviar <Spinner loading={loading} /></button>    
+                <button onClick={() => navigate("/home")} type="button" className="btn btn-outline-primary" > <ImCancelCircle/> Cancelar </button> 
             </div>
         </form> 
     </div>

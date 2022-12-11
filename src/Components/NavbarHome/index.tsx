@@ -25,7 +25,7 @@ export default function NavbarHome(){
     <div className="container-fluid">
       <a className="navbar-brand" href="#">
         <img src={require("../../@img/leadsoft_lambda_gradiente-azul.png")} alt="Logo" width="30" height="24" className="d-inline-block align-text-top" style={{margin: 3}}/>
-        Leadsoft <Button message ="LogOut" arrowFunction={LogOut}/> <Button message="Add new People" arrowFunction={AddNewPeople}/>
+        Leadsoft <Button message ="LogOut" arrowFunction={LogOut}/> <Button message="Adicionar" arrowFunction={AddNewPeople}/>
       </a>
     </div>
   </nav>
