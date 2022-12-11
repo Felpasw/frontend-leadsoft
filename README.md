@@ -5,5 +5,5 @@ First you'll need to install all the dependences running:
 Than, in the project directory, you can run:
 ### `npm run start`
 This'll open a sever on localhost:3000 and there you can see the website working.
-# To run this project you'll node.js installed on your machine.
+To run this project you'll node.js installed on your machine.
 
