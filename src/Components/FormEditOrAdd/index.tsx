@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 //Types
-import PeopleType from "../../@types/People";
+import {PeopleType} from "../../@types/People";
 //Axios
 import { Axios } from "../../Config/Axios";
 

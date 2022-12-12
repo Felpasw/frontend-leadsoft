@@ -12,27 +12,20 @@ import {HiUserRemove} from "react-icons/hi";
 //Toast
 import { toast } from "react-toastify";
 
-
-interface PeopleType{
-    Id: string,
-    Name: string,
-    Surname: string,
-    DateOfBirth: string
-    Weigth: number,
-    Height: number
-}
+//Types
+import {PeopleType, PeopleTypeIMC} from "../../@types/People";
 
 
 
 
 export default function PeopleList(){
-    const[People, setPeople] = useState([] as PeopleType[]);
+    const[People, setPeople] = useState([] as PeopleTypeIMC[]);
     const navigate = useNavigate();
    
     
     //--------------
     const getItems = async ()  => {
-        await Axios.get('/api/v1/People').then((response: { data: React.SetStateAction<PeopleType[]>; }) => setPeople(response.data))
+        await Axios.get('/api/v1/People/IMC').then((response: { data: React.SetStateAction<PeopleTypeIMC[]>; }) => setPeople(response.data))
     }
     //-------------
     useEffect(() =>{
@@ -57,16 +50,15 @@ export default function PeopleList(){
         <Fragment>
          <div className="row">
         { 
-            People.map( (element:PeopleType) =>
+            People.map( (element:PeopleTypeIMC) =>
            
                 <div className="col-3 d-flex p-2">
                         <div className="card text-primary" style={{width: "18rem", margin: 10}}  >
                             <div className="card-body float-none">
-                                <h5 className="card-title"><IoMdContact/> {element.Name} </h5>
-                                <h6 className="card-subtitle mb-2 text-muted">{element.Surname}</h6>
+                                <h5 className="card-title"><IoMdContact/> {element.FullName} </h5>
                                 <p className="card-text"><FaWeightHanging/> Peso: {element.Weigth}kg</p>
                                 <p className="card-text"><GiBodyHeight/> Altura: {element.Height}m</p>
-                                <p className="card-text"><GiWeightLiftingUp/> IMC: {element.Weigth / (element.Height*element.Height)} kg/m²</p>
+                                <p className="card-text"><GiWeightLiftingUp/> IMC: {element.IMC} kg/m²</p>
                                     <div className="text-center">
                                         <button 
                                         type="button" 
@@ -75,7 +67,7 @@ export default function PeopleList(){
                                         <button 
                                         type="button" 
                                         className="btn btn-outline-primary"  
-                                        onClick={() => removePeople(element.Id, element.Name)}><HiUserRemove/> Remover</button>
+                                        onClick={() => removePeople(element.Id, element.FullName)}><HiUserRemove/> Remover</button>
                                     </div>
                               
                         </div>

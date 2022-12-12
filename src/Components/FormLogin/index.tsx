@@ -82,7 +82,7 @@ export default function FormLogin(){
                         placeholder="name@example.com" 
                         onChange={handleChange} 
                         name = "username"/>
-                    <label htmlFor="floatingInput"><MdEmail /> Email: </label>
+                    <label htmlFor="floatingInput"><MdEmail /> Email </label>
                 </div>
             </div>
             <div className="form-floating mb-3 text-primary "style={{width: '100%'}}>
@@ -91,7 +91,7 @@ export default function FormLogin(){
                 placeholder="name@example.com" 
                 onChange={handleChange}
                 name = "password"/>
-                <label htmlFor="floatingInput"><RiLockPasswordFill /> Senha:</label>
+                <label htmlFor="floatingInput"><RiLockPasswordFill /> Senha</label>
             </div>
             <div className="col-8 offset-md-5">
                 <button onClick={handleSubmit} type="button" className="btn btn-outline-primary" data-testid="EnterButton" >Enter <Spinner loading={Loading} /></button>  
