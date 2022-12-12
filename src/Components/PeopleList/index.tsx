@@ -9,6 +9,7 @@ import {GiWeightLiftingUp, GiBodyHeight} from "react-icons/gi"
 import { FaWeightHanging } from "react-icons/fa";
 import {AiFillEdit} from "react-icons/ai";
 import {HiUserRemove} from "react-icons/hi";
+import {VscPerson} from "react-icons/vsc"
 //Toast
 import { toast } from "react-toastify";
 
@@ -37,7 +38,7 @@ export default function PeopleList(){
         if(window.confirm(`Remover ${name}?`)){
             const DeleteResponse: AxiosResponse = await Axios.delete(`api/v1/People/${id}`)
             if(DeleteResponse.status = 200){
-                toast.success("Data succesfully deleted!")
+                toast.success("Pessoa removida com sucesso!")
             }
         }
         
@@ -58,6 +59,7 @@ export default function PeopleList(){
                                 <h5 className="card-title"><IoMdContact/> {element.FullName} </h5>
                                 <p className="card-text"><FaWeightHanging/> Peso: {element.Weigth}kg</p>
                                 <p className="card-text"><GiBodyHeight/> Altura: {element.Height}m</p>
+                                <p className="card-text"><VscPerson/> Idade: {element.Age} anos</p>
                                 <p className="card-text"><GiWeightLiftingUp/> IMC: {element.IMC} kg/m²</p>
                                     <div className="text-center">
                                         <button 
