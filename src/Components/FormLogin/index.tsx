@@ -63,8 +63,8 @@ export default function FormLogin(){
             }
         } catch (error) {
             console.log(error);
-            toast.error("Incorrect user or password!")
-            //toast.error("Usuário ou senha inválidos!");
+            toast.error("Usuário ou senha incorretos!")
+           
             setLoading(false);
         }
        
